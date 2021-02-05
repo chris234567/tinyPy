@@ -1,4 +1,4 @@
-#https://www.codementor.io/@ilyaas97/6-python-projects-for-beginners-yn3va03fs
+#https://www.codementor.io/@ilyaas97/6-python-projects-for-beginners-yn3va03fs # some inspiration from here
 
 #1 Guess The Number
 
@@ -137,8 +137,8 @@ def fibIterative(n):
         nums.append(nums[i] + nums[i+1])
     return nums
 
-def fibRecursive(n, nums): # n musn't be zero
-    if n == 1: # abort condition
+def fibRecursive(n, nums):
+    if n < 1: # abort condition
         return nums
     nums.append(nums[-1] + nums[-2])
     return fibRecursive(n-1, nums)
@@ -155,4 +155,30 @@ def fibRecursive(n, nums): # n musn't be zero
 #
 # timeDif(100) # recursion is slower and the difference gets greater proportional to n
 
+# binary search
 
+from random import randint
+
+def binSearch(n, list): # number between 0 and 100
+    index = 0
+    if index == 0:
+        index = len(list)
+
+    if len(list) < 2:
+        return -1
+
+    if list[len(list)//2] == n: # // integer division
+        print('found')
+        print(index) ################# implement show index
+    index -= len(list)//2
+    if binSearch(n, list[:len(list)//2]) != - 1:
+        return binSearch(n, list[:len(list) // 2])
+    else:
+        return binSearch(n, list[len(list)//2:])
+
+rnd = []
+
+for i in range(5):
+    rnd.append(i)
+
+binSearch(4, rnd)
