@@ -155,7 +155,7 @@ def fibRecursive(n, nums):
 #
 # timeDif(100) # recursion is slower and the difference gets greater proportional to n
 
-# binary search
+# 8 binary search
 
 from random import randint
 
@@ -176,9 +176,47 @@ def binSearch(n, list): # number between 0 and 100
     else:
         return binSearch(n, list[len(list)//2:])
 
-rnd = []
+# rnd = []
+# for i in range(5):
+#     rnd.append(i)
+# binSearch(4, rnd)
 
-for i in range(5):
-    rnd.append(i)
+# 9 shortest distance to given char
+# https://leetcode.com/explore/featured/card/february-leetcoding-challenge-2021/584/week-1-february-1st-february-7th/3631/
 
-binSearch(4, rnd)
+from math import *
+
+s = ''
+char = ''
+
+def shortestToChar(s: str, c: char):
+    if c not in s:
+        raise Exception('letter was not in string. please choose a different one!')
+
+    answer = []
+    occurrences = []  # indexes of special char
+
+    for i in range(len(s)):
+        if s[i] == c:
+            occurrences.append(i)
+
+    for i in s:
+        diffs = []
+
+        for r in occurrences:
+            diffs.append(abs(s.index(i) - r))
+
+        min = diffs[0]
+
+        for k in diffs:  # determine minimal distance to next occurence of c
+            if k < min:
+                min = k
+
+        answer.append(min)
+
+    return answer
+
+
+print(shortestToChar('loveleetcode', 'e'))
+
+
