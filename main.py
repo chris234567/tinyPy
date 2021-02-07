@@ -213,6 +213,29 @@ def shortestToChar(s: str, c: str):
     return answer
 
 
-print(shortestToChar('loveleetcode', 'e'))
+# print(shortestToChar('loveleetcode', 'e'))
+
+# 10 longest substring without repeating characters
+# https://leetcode.com/problems/longest-substring-without-repeating-characters/
+
+def getLongestSubstringWithoutDups(s: str) -> str:
+    subStrings = []
+    duplicates = []
+    temp = ''
+
+    for i in range(len(s)):
+        for r in duplicates:
+            if s[i] == r:
+                subStrings.append(temp)
+                temp = ''  # reset substring
+        temp = temp + s[i]
+        duplicates.append(s[i])
+
+    max = ''
+    for i in subStrings:  # get longest substring
+        if len(i) > len(max):
+            max = i
+    return max
 
 
+print(getLongestSubstringWithoutDups('abcabcbb'))
