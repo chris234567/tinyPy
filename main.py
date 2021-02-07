@@ -186,10 +186,7 @@ def binSearch(n, list): # number between 0 and 100
 
 from math import *
 
-s = ''
-char = ''
-
-def shortestToChar(s: str, c: char):
+def shortestToChar(s: str, c: str):
     if c not in s:
         raise Exception('letter was not in string. please choose a different one!')
 
@@ -213,7 +210,6 @@ def shortestToChar(s: str, c: char):
                 min = k
 
         answer.append(min)
-
     return answer
 
 
