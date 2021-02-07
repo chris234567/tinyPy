@@ -1,2 +1,2 @@
 # tinyPy
-writing some siny code snippets to learn python3
+writing some tiny code snippets to learn python3
