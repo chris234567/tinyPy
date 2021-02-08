@@ -239,3 +239,26 @@ def getLongestSubstringWithoutDups(s: str) -> str:
 
 
 print(getLongestSubstringWithoutDups('abcabcbb'))
+
+# 11 can place flowers
+# https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/569/week-1-december-1st-december-7th/3555/
+
+from typing import List
+
+def canPlaceFlowers(flowerbed: List[int], n: int) -> bool:
+    for i in range(len(flowerbed)):
+        if flowerbed[i] == 0:
+            if i == 0 and flowerbed[i + 1] == 0: # first plot
+                flowerbed[i] = 0
+                n -= 1
+            elif i == len(flowerbed) and flowerbed[i - 1] == 0: # last plot
+                flowerbed[i] = 0
+                n -= 1
+            else:
+                if flowerbed[i - 1] + flowerbed[i + 1] == 0: # intermediate plots
+                    flowerbed[i] = 1
+                    n -= 1
+    return n == 0
+
+
+print(canPlaceFlowers([1, 0, 0, 0, 1], 2))
