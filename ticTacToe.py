@@ -60,7 +60,6 @@ class TicTacToe:
             self.checkNone(y)
             print('X-Koordinate: ', end='')
             x = input()
-            print('adsnjkashdjkah')
 
         return (int(y), int(x))
 
@@ -73,8 +72,8 @@ class TicTacToe:
             b = True
         if b:
             print('Achtung! Ungueltige Eingabe.')
-            return False
-        return True
+            return b
+        return b
 
 
     def checkNone(self, a):
@@ -97,8 +96,10 @@ class TicTacToe:
         # possible positions: (0, 0), (0, 4), (0, 8), (1, 0), (1, 4), (1, 8), (2, 0), (2, 4), (2, 8)
         temp = ''
         moves = (y, x)
-        while not self.checkInput(y, x):
+        while self.checkInput(y, x):
             moves = self.gameInput()
+            y = moves[0]
+            x = moves[1]
 
         y = moves[0]
         x = self.shiftIndex(moves[1])
@@ -116,7 +117,7 @@ class TicTacToe:
                 if self.field[moves[0]][x] == ' ':
                     invalid = False
 
-        for c in range(len(self.field[y])):
+        for c in range(len(self.field[y])): # build string as new line for field
             if c == x:
                 temp += sym
                 continue
@@ -127,7 +128,7 @@ class TicTacToe:
         self.checkWin()
 
 
-def main():
+def game():
     spiel = TicTacToe()
     spiel.printField()
     while not spiel.finished:
@@ -142,4 +143,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    game()
