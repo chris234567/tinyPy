@@ -3,9 +3,11 @@ class TicTacToe:
     field = ['  |   |  ', '  |   |  ', '  |   |  ']
     finished = False
 
+
     def printField(self):
         for y in self.field:
             print(y)
+
 
     def checkWin(self):
         for c in self.symbols:
@@ -45,16 +47,42 @@ class TicTacToe:
         if self.finished:  # should not print again if game already won
             print(f'Congratulations Player {player} won')
 
-    # def checkInput(self,y , x):
-    #     if not type(x) is int:
-    #         print
 
     def gameInput(self):
         print('Y-Koordinate: ', end='')
-        y = int(input())
+        y = input()
         print('X-Koordinate: ', end='')
-        x = int(input())
-        return (y, x)
+        x = input()
+
+        while self.checkNone(y) or self.checkNone(x):
+            print('Y-Koordinate: ', end='')
+            y = input()
+            self.checkNone(y)
+            print('X-Koordinate: ', end='')
+            x = input()
+            print('adsnjkashdjkah')
+
+        return (int(y), int(x))
+
+
+    def checkInput(self, y, x):
+        b = False
+        if not type(y) is int or not type(x) is int:
+            b = True
+        elif not 0 <= y <= 2 or not 0 <= x <= 2:
+            b = True
+        if b:
+            print('Achtung! Ungueltige Eingabe.')
+            return False
+        return True
+
+
+    def checkNone(self, a):
+        if a == None or a == '':
+            print('Achtung! Keine Eingabe!')
+            return True
+        return False
+
 
     def shiftIndex(self, x: int):
         if x == 1:  # change x to proper string index
@@ -64,10 +92,16 @@ class TicTacToe:
         else:
             return 0
 
+
     def makeMove(self, y: int, x: int, sym: str):
         # possible positions: (0, 0), (0, 4), (0, 8), (1, 0), (1, 4), (1, 8), (2, 0), (2, 4), (2, 8)
         temp = ''
-        x = self.shiftIndex(x)
+        moves = (y, x)
+        while not self.checkInput(y, x):
+            moves = self.gameInput()
+
+        y = moves[0]
+        x = self.shiftIndex(moves[1])
 
         if self.field[y][x] != ' ':  # loop to cover invalid input
             invalid = True
@@ -76,8 +110,10 @@ class TicTacToe:
                 moves = self.gameInput()
                 y = moves[0]
                 x = moves[1]
-                x = self.shiftIndex(x)
-                if self.field[y][x] == ' ':
+                while not self.checkInput(y, x):
+                    moves = self.gameInput()
+                x = self.shiftIndex(moves[1])
+                if self.field[moves[0]][x] == ' ':
                     invalid = False
 
         for c in range(len(self.field[y])):
