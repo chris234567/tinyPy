@@ -13,24 +13,22 @@ class TicTacToe:
         for c in self.symbols:
             if self.finished:
                 break
-            char = c
-            winningLines = [
-                [f'{char} | {char} | {char}', f'  |   |  ', f'  |   |  '],  # top line
-                [f'  |   |  ', f'{char} | {char} | {char}', f'  |   |  '],  # middle line
-                [f'  |   |  ', f'  |   |  ', f'{char} | {char} | {char}'],  # bottom line
-                [f'{char} |   |  ', f'{char} |   |  ', f'{char} |   |  '],  # left line
-                [f'  |   | {char}', f'  |   | {char}', f'  |   | {char}'],  # right line
-                [f'  | {char} |  ', f'  | {char} |  ', f'  | {char} |  '],  # center line
-                [f'{char} |   |  ', f'  | {char} |  ', f'  |   | {char}'],  # left diagonal
-                [f'  |   | {char}', f'  | {char} |  ', f'{char} |   |  '],  # right diagonal
-            ]
 
-            if self.field[0] == winningLines[0][0]:
-                self.finished = True  # top line
-            elif self.field[1] == winningLines[1][1]:
-                self.finished = True  # middle line
-            elif self.field[2] == winningLines[2][2]:
-                self.finished = True  # bottom line
+            # winningLines = [
+            #     [f'{char} | {char} | {char}', f'  |   |  ', f'  |   |  '],  # top line
+            #     [f'  |   |  ', f'{char} | {char} | {char}', f'  |   |  '],  # middle line
+            #     [f'  |   |  ', f'  |   |  ', f'{char} | {char} | {char}'],  # bottom line
+            #     [f'{char} |   |  ', f'{char} |   |  ', f'{char} |   |  '],  # left line
+            #     [f'  |   | {char}', f'  |   | {char}', f'  |   | {char}'],  # right line
+            #     [f'  | {char} |  ', f'  | {char} |  ', f'  | {char} |  '],  # center line
+            #     [f'{char} |   |  ', f'  | {char} |  ', f'  |   | {char}'],  # left diagonal
+            #     [f'  |   | {char}', f'  | {char} |  ', f'{char} |   |  '],  # right diagonal
+            # ]
+
+            pattern = f'{c} | {c} | {c}'
+
+            if self.field[0] == pattern or self.field[1] == pattern or self.field[2] == pattern:
+                self.finished = True  # top, middle and bottom line
             elif self.field[0][0] == c and self.field[1][0] == c and self.field[2][0] == c:
                 self.finished = True  # left line
             elif self.field[0][8] == c and self.field[1][8] == c and self.field[2][8] == c:
@@ -42,10 +40,10 @@ class TicTacToe:
             elif self.field[0][8] == c and self.field[1][4] == c and self.field[2][0] == c:
                 self.finished = True  # right diagonal
 
-        player = 1 if char == 'X' else 'O'
+            player = 1 if c == 'X' else 'O'
 
-        if self.finished:  # should not print again if game already won
-            print(f'Congratulations Player {player} won')
+            if self.finished:  # should not print again if game already won
+                print(f'Congratulations Player {player} won')
 
 
     def gameInput(self):
